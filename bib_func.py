@@ -27,9 +27,9 @@ def bibtex_service(lines):
                     if not x in references:
                         references.append(x) 
   
+    btxt_str = ''
     for x in references:
         index = None
-        btxt_str = ''
         if re.search('.*\:\d{4}\w\w\w?',x) : index = 'texkey'
         elif re.search('.*\/\d{7}',x)      : index = 'eprint'
         elif re.search('\d{4}\.\d{4}',x)   : index = 'eprint'
@@ -38,7 +38,6 @@ def bibtex_service(lines):
             x = re.sub('\.',',',x)
         elif re.search('\w\-\w',x) : index = 'r'
         if index :
-            #print 'find',index,x,'in INSPIRE'
             recid_list = perform_request_search(p=x)
             if recid_list:
                 bfo = BibFormatObject(recid_list[0])
@@ -48,7 +47,7 @@ def bibtex_service(lines):
             print '***************************************'
             print '*** I do not know what',x,'is. ***'
             print '***************************************'
-        return btxt_str
+    return btxt_str
 
 if __name__ == "__main__":
     main()
