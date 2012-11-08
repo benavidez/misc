@@ -11,7 +11,7 @@ def main():
     
     bibFile = open('file.bib', 'w')
     bibtxt = bibtex_service(lines)
-    print bibtxt
+    bibFile.write(bibtxt)
     bibFile.close()
 
 def bibtex_service(lines):
