@@ -15,6 +15,7 @@ inputTeX.close()
 bibFile = open('file.bib', 'w')
 
 for line in lines:
+  print line 
   if citeString in line:
     for a in list(re.finditer(citeStringMatch,line)):
       r = a.groups()[0].split(',')
@@ -22,7 +23,7 @@ for line in lines:
         x = re.sub('\s','',x)
         if not x in references:
           references.append(x) 
-
+exit()
 
 bibFile = open('file.bib', 'w')
 for x in references:
@@ -35,7 +36,7 @@ for x in references:
     x = re.sub('\.',',',x)
   elif re.search('\w\-\w',x) : index = 'r'
   if index :
-    print 'find',index,x,'in INSPIRE'
+    #print 'find',index,x,'in INSPIRE'
     recid_list = perform_request_search(p=x)
     if recid_list:
          bfo = BibFormatObject(recid_list[0])
