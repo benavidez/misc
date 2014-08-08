@@ -1,0 +1,15 @@
+#! /bin/bash
+
+#Adds a new mock user
+#Usage: ./add-mock-user username
+#Note: yum install mock if not present
+
+echo "Adding $1 as a mock user..."
+
+sudo /usr/sbin/useradd $1
+
+sudo /usr/bin/passwd $1
+
+sudo /usr/sbin/usermod -a -G mock $1
+
+echo "Done!"

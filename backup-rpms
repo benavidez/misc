@@ -1,0 +1,12 @@
+#! /bin/bash
+#Purpose: finds all installed rpms and downloads them with their dependencies.
+#Author:  Eduardo Benavidez
+
+#find all rpms 
+rpm -qa > ./installed-rpms.log
+
+#put installed packages into a single string separated by a single space
+for i in $(cat ./installed-rpms.log) ; do packages+="$i " ; done
+
+#run yumdownloader and resolve dependencies
+yumdownloader --resolve --destdir="./" $packages
